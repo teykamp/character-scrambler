@@ -19,12 +19,19 @@ const [userInput, setUserInput] = useState('')
     setUserInput('')
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && event.ctrlKey) {
+      handleEncodeClick()
+    }
+  };
+
   return (
     <div>
       <div style={{
         display: 'block',
       }}>
         <textarea
+          onKeyDown={handleKeyDown}
           onChange={handleInputChange}
           value={userInput}
           style={{

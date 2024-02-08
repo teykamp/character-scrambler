@@ -8,13 +8,17 @@ interface Props {
 
 const ConverterOutput: React.FC<Props> = ({ textToEncode }) => {
 
+  const [copyToClipboardSuccess, setCopyToClipboardSuccess] = useState<boolean | undefined>(undefined);
+
   const handleCopyEncodedText = () => {
     if (encodedText) {
       try {
         navigator.clipboard.writeText(encodedText)
         console.log("Text copied to clipboard")
+        setCopyToClipboardSuccess(true)
       } catch (error) {
         console.error("Failed to copy text to clipboard:", error)
+        setCopyToClipboardSuccess(false)
       }
     }
   }
@@ -39,6 +43,7 @@ const ConverterOutput: React.FC<Props> = ({ textToEncode }) => {
   return (
     <div style={{
       display: 'block',
+      position: 'relative',
     }}>
       <textarea
         value={encodedText}
@@ -63,6 +68,42 @@ const ConverterOutput: React.FC<Props> = ({ textToEncode }) => {
             marginTop: '10px',
           }}
         >Copy</button>
+      </div>
+      <div style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+      }}>
+        {typeof(copyToClipboardSuccess) !== 'undefined' && <Banner state={copyToClipboardSuccess}/>}
+      </div>  
+    </div>
+  )
+}
+
+type BannerProps = {
+  state: boolean
+}
+
+const Banner: React.FC<BannerProps> = ({ state }) => {
+
+  return (
+    <div style={{
+      marginTop: '30px',
+      position: 'absolute',
+    }}>
+      <div
+        style={{
+          background: state ? 'RGBA(6, 236, 152, .8)' : 'RGBA(237, 7, 91, .8)',
+          width: 'auto',
+          padding: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '10px',
+          fontWeight: '500',
+        }}
+      >
+        { state ? 'Copied to Clipboard' : 'Error Copying to Clipboard' } 
       </div>
     </div>
   )
