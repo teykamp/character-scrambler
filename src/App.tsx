@@ -5,18 +5,20 @@ import ConverterOutput from './components/ConverterOutput.tsx'
 
 
 function App() {
-  const [userInputValue, setUserInputValue] = useState<string>('')
+  const [textToEncode, setTextToEncode] = useState<string>('')
   
   return (
-    <>
+    <div style={{
+      display: 'flex',
+      gap: '5rem',
+    }}>
       <UserInput 
-        userInputValue={userInputValue}
-        setUserInputValue={setUserInputValue}
+        setTextToEncode={setTextToEncode}
       />
       <ConverterOutput 
-        dataToConvert={userInputValue}
+        textToEncode={textToEncode}
       />
-    </>
+    </div>
   )
 }
 

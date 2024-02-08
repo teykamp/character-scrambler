@@ -1,13 +1,23 @@
 import React from 'react'
 
 interface Props {
-  dataToConvert: string
+  textToEncode: string
 }
 
-const ConverterOutput: React.FC<Props> = ({ dataToConvert }) => {
+const ConverterOutput: React.FC<Props> = ({ textToEncode }) => {
   return (
     <>
-      {dataToConvert}
+      <textarea
+        value={textToEncode}
+        style={{
+          resize: 'none',
+          padding: '10px',
+          marginBottom: '58px',
+        }}
+        cols={80}
+        placeholder="Output Text"
+        readOnly
+      ></textarea>
     </>
   )
 }
