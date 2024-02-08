@@ -30,9 +30,10 @@ const [userInput, setUserInput] = useState('')
           style={{
             resize: 'none',
             padding: '10px',
+            fontSize: '20px',
           }}
-          rows={45} 
-          cols={80}
+          rows={25} 
+          cols={50}
           placeholder="Enter Text"
         ></textarea>
       </div>
