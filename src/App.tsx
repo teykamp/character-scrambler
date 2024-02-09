@@ -44,7 +44,7 @@ function App() {
             <p
               style={{
                 maxWidth: '60em',
-                marginTop: '80px',
+                marginTop: '60px',
                 textAlign: 'left',
               }}
             >{descriptionText}</p>

@@ -6,9 +6,11 @@ interface Props {
   textToEncode: string
 }
 
+type ClipboardState = boolean | undefined
+
 const ConverterOutput: React.FC<Props> = ({ textToEncode }) => {
 
-  const [copyToClipboardSuccess, setCopyToClipboardSuccess] = useState<boolean | undefined>(undefined);
+  const [copyToClipboardSuccess, setCopyToClipboardSuccess] = useState<ClipboardState>(undefined)
 
   const handleCopyEncodedText = () => {
     if (encodedText) {
@@ -74,17 +76,24 @@ const ConverterOutput: React.FC<Props> = ({ textToEncode }) => {
         display: 'flex',
         justifyContent: 'center',
       }}>
-        {typeof(copyToClipboardSuccess) !== 'undefined' && <Banner state={copyToClipboardSuccess}/>}
+        {typeof(copyToClipboardSuccess) !== 'undefined' && 
+        <Banner 
+          copyToClipboardSuccess={copyToClipboardSuccess}
+          setCopyToClipboardSuccess={setCopyToClipboardSuccess}
+        />}
       </div>  
     </div>
   )
 }
 
 type BannerProps = {
-  state: boolean
+  copyToClipboardSuccess: boolean
+  setCopyToClipboardSuccess: (value: ClipboardState) => void
 }
 
-const Banner: React.FC<BannerProps> = ({ state }) => {
+const Banner: React.FC<BannerProps> = ({ copyToClipboardSuccess, setCopyToClipboardSuccess }) => {
+
+  const handleCloseClick = () => setCopyToClipboardSuccess(undefined)
 
   return (
     <div style={{
@@ -93,9 +102,8 @@ const Banner: React.FC<BannerProps> = ({ state }) => {
     }}>
       <div
         style={{
-          background: state ? 'RGBA(6, 236, 152, .8)' : 'RGBA(237, 7, 91, .8)',
+          background: copyToClipboardSuccess ? 'RGBA(6, 236, 152, .8)' : 'RGBA(237, 7, 91, .8)',
           width: 'auto',
-          padding: '20px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -103,7 +111,28 @@ const Banner: React.FC<BannerProps> = ({ state }) => {
           fontWeight: '500',
         }}
       >
-        { state ? 'Copied to Clipboard' : 'Error Copying to Clipboard' } 
+        <p style={{
+          paddingLeft: '40px',
+        }}>
+          { copyToClipboardSuccess ? 'Copied to Clipboard' : 'Error Copying to Clipboard' } 
+        </p>
+        <p
+          onClick={handleCloseClick}
+          style={{
+            fontWeight: '600',
+            height: '1.5em',
+            aspectRatio: 1,
+            background: 'RGBA(256, 256, 256, 0.2)',
+            position: 'relative',
+            display: 'flex',
+            alignContent: 'center',
+            justifyContent: 'center',
+            marginLeft: '30px',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            marginRight: '10px',
+          }}
+        >X</p>
       </div>
     </div>
   )

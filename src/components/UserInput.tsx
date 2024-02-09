@@ -5,19 +5,14 @@ interface Props {
 }
 
 const UserInput: React.FC<Props> = ({ setTextToEncode }) => {
-const [userInput, setUserInput] = useState('')
+  
+  const [userInput, setUserInput] = useState('')
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setUserInput(e.target.value)
-  }
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setUserInput(e.target.value)
 
-  const handleEncodeClick = () => {
-    setTextToEncode(userInput)
-  }
+  const handleEncodeClick = () => setTextToEncode(userInput)
 
-  const handleClearClick = () => {
-    setUserInput('')
-  }
+  const handleClearClick = () => setUserInput('')
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter' && event.ctrlKey) {
