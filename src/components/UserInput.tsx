@@ -5,7 +5,7 @@ interface Props {
 }
 
 const UserInput: React.FC<Props> = ({ setTextToEncode }) => {
-  
+
   const [userInput, setUserInput] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setUserInput(e.target.value)
@@ -44,18 +44,25 @@ const UserInput: React.FC<Props> = ({ setTextToEncode }) => {
         justifyContent: 'center',
         gap: '10px',
       }}>
-        <button 
-          onClick={handleClearClick}
-          style={{
-            marginTop: '10px',
-          }}
-        >Clear</button>
-        <button 
-          onClick={handleEncodeClick}
-          style={{
-            marginTop: '10px',
-          }}
-        >Encode</button>
+        <div>
+          <button 
+            onClick={handleClearClick}
+            style={{
+              marginTop: '10px',
+            }}
+          >Clear</button>
+        </div>
+        <div>
+          <button 
+            onClick={handleEncodeClick}
+            style={{
+              marginTop: '10px',
+            }}
+          >Encode</button>
+          <p style={{
+            fontSize: '12px'
+          }}>ctrl + enter</p>
+        </div>
       </div>
     </div>
   )
